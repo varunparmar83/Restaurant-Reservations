@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
+from datetime import datetime 
 from data_structure import NODE, QUEUE
+
 
 class GUI():
     def __init__(self, root):
@@ -62,8 +64,10 @@ class GUI():
             if name == "" or people <= 0:
                 return messagebox.showwarning(title="Input Error", message="Please enter a valid name and number of people!")
 
-            self.queue.Enqueue(name, people)
-            messagebox.showinfo(title="Success", message="Your booking is successfully added!")
+            booking_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Current timestamp
+
+            self.queue.Enqueue(name, people, booking_time)
+            messagebox.showinfo(title="Success", message=f"Your booking is successfully added at {booking_time}!")
             self.name_value.set("")
             self.people_count.set(0)
             self.view_bookings()
